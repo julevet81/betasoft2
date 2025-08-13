@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('hours_worked')->nullable();
             $table->longText('notes')->nullable(); // Optional: for additional task notes
             $table->timestamps();
+            $table->softDeletes(); // Optional: for soft delete functionality
         });
     }
 

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->foreignId('project_id')->nullable()->constrained()->onDelete('cascade'); // Optional: if payments are linked to projects
             $table->date('payment_date')->nullable();
-            $table->enum('status', ['pending', 'completed', 'failed'])->default('pending'); // Optional: to track payment status
-            $table->enum('method', ['cash', 'bank_transfer', 'credit_card'])->default('bank_transfer'); // Optional: to track payment method
+            $table->enum('status', ['pending', 'completed', 'failed', 'refunded', 'partially_completed'])->default('pending'); // Optional: to track payment status
+            $table->enum('method', ['cash', 'bank_transfer', 'credit_card', 'paypal'])->default('bank_transfer'); // Optional: to track payment method
             $table->string('reference')->nullable(); // Optional: to store transaction ID for
             $table->longText('notes')->nullable(); // Optional: to store additional information about the payment
             $table->timestamps();

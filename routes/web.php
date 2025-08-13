@@ -4,13 +4,17 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContractTypeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ManageUsersController;
+use App\Http\Controllers\MonthlyWorkSummaryController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserPermissionController;
+use App\Models\MonthlyWorkSummary;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -121,8 +125,22 @@ Route::resource('clients', ClientController::class)
 Route::resource('projects', ProjectController::class)
     ->middleware(['auth', 'verified']);
 
-require __DIR__.'/auth.php';
+########## Tasks Management #############
 
+Route::resource('tasks', TaskController::class)
+    ->middleware(['auth', 'verified']);
+
+########## Payment Management #############
+
+Route::resource('payments', PaymentController::class)
+    ->middleware(['auth', 'verified']);
+
+########## Monthly Summary Management #############
+
+Route::resource('monthly-summary', MonthlyWorkSummaryController::class)
+    ->middleware(['auth', 'verified']);
+
+require __DIR__.'/auth.php';
 
 });
 

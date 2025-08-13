@@ -15,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::with(['client', 'manager.user', 'status'])->get();
         return view('projects.index', compact('projects'));
     }
 
@@ -35,7 +35,19 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $project = Project::create($request->all());
+        $validatedData = $request->validate([
+            'name'       => 'required|string|max:255',
+            'client_id'  => 'required|exists:clients,id',
+            'budget'     => 'required|numeric',
+            'manager_id' => 'required|exists:employees,id',
+            'status_id'  => 'required|exists:statuses,id',
+            'description'=> 'nullable|string',
+            'start_date' => 'required|date',
+            'expected_end_date'   => 'required|date|after:start_date',
+        ]);
+
+        $project = Project::create($validatedData);
+        $project->save();
         return redirect()->route('projects.index');
     }
 
@@ -44,14 +56,15 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $employee = Employee::where('id', $project->manager_id)->first();
         $projectData = [
             'name'      => $project->name,
             'client'    => $project->client->name,
             'budget'    => $project->budget,
-            'manager'   => $project->manager->user->name,
+            'manager'   => $employee->user->name ,
             'description' => $project->description,
             'start_date' => $project->start_date,
-            'end_date'   => $project->end_date,
+            'expected_end_date'   => $project->expected_end_date,
             'status'     => $project->status,
         ];
 
@@ -63,7 +76,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        $clients = Client::all();
+        $employees = Employee::all();
+        $statuses = Status::all();
+        return view('projects.edit', compact('project', 'clients', 'employees', 'statuses'));
     }
 
     /**
@@ -71,7 +87,17 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $project->update($request->all());
+        $validatedData = $request->validate([
+            'name'        => 'required|string|max:255',
+            'client_id'  => 'required|exists:clients,id',
+            'budget'     => 'required|numeric',
+            'manager_id' => 'required|exists:employees,id',
+            'status_id'  => 'required|exists:statuses,id',
+            'description'=> 'nullable|string',
+            'start_date' => 'required|date',
+            'expected_end_date'   => 'required|date|after:start_date',
+        ]);
+        $project->update($validatedData);
         return redirect()->route('projects.index');
     }
 

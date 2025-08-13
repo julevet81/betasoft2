@@ -5,7 +5,13 @@
 @section('content')
 				
 <div class="container">
-    <h2>Add project</h2>
+
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">{{ $error }}</div>
+    @endforeach
+    <div class="mb-4">
+        <h2>Add project</h2>
+    </div>
 
     <form action="{{ route('projects.store') }}" method="POST">
         @csrf

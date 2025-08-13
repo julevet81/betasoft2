@@ -10,7 +10,7 @@ class Payment extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id', 'amount', 'payment_date', 'status', 'method', 'reference', 'notes'];
+    protected $fillable = ['user_id', 'type', 'project_id', 'amount', 'payment_date', 'status', 'method', 'reference', 'notes'];
 
     protected $casts = [
         'payment_date' => 'date',

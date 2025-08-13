@@ -37,10 +37,6 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::find($request->user_id);
-        if (!$user) {
-            return redirect()->back()->withErrors(['user_id' => 'User not found']);
-        }
         
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',
@@ -49,6 +45,14 @@ class EmployeeController extends Controller
             'start_date' => 'required|date',
             
         ]);
+
+        // Check if employee already exists
+        $exists = Employee::where('user_id', $request->user_id)->exists();
+
+        if ($exists) {
+            return redirect()->back()
+                ->withErrors(['user_id' => 'This user is already an employee.']);
+        }
 
         Employee::create($validated);
 

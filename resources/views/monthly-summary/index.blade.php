@@ -41,8 +41,8 @@
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
 									<!-- Button trigger modal -->
-									<a href="{{ route('projects.create') }}" class="btn btn-primary">
-										Add project
+									<a href="{{ route('monthly-summary.create') }}" class="btn btn-primary">
+										Add montly-summary
 									</a>
 								</div>
 							</div>
@@ -52,39 +52,29 @@
             <thead class="table-light">
                 <tr>
                     <th>#</th>
-                    <th>project Name</th>
-                    <th>Client Name</th>
-                    <th>Description</th>
-					<th>Budget</th>
-					<th>Manager</th>
-					<th>Status</th>
-					<th>Start Date</th>
-					<th>Expected End Date</th>
-					<th>Actual End Date</th>
+                    <th>Employee</th>
+                    <th>Month</th>
+                    <th>Total Hours</th>
+					<th>Notes</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($projects as $index => $project)
+                @foreach ($summaries as $index => $summary)
                 <tr>
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ $project->name }}</td>
-                    <td>{{ $project->client->name }}</td>
-                    <td>{{ $project->description }}</td>
-					<td>{{ $project->budget }}</td>
-					<td>{{ $project->manager->user->name }}</td>
-					<td>{{ $project->status->name }}</td>
-					<td>{{ $project->start_date }}</td>
-					<td>{{ $project->expected_end_date }}</td>
-					<td>{{ $project->actual_end_date }}</td>
+                    <td>{{ $summary->employee->user->name }}</td>
+                    <td>{{ $summary->month->format('F Y') }}</td>
+                    <td>{{ $summary->total_hours }}</td>
+					<td>{{ $summary->notes }}</td>
                     <td>
-                        <a href="{{ route('projects.show', $project->id) }}" class="btn btn-sm btn-success">Show</a>
-                        <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-sm btn-info">Edit</a>
-                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$project->id}}">delete<i class="las la-trash"></i></a>
+                        <a href="{{ route('monthly-summary.show', $summary->id) }}" class="btn btn-sm btn-success">Show</a>
+                        <a href="{{ route('monthly-summary.edit', $summary->id) }}" class="btn btn-sm btn-info">Edit</a>
+                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$summary->id}}">delete<i class="las la-trash"></i></a>
 
                     </td>
                 </tr>
-                @include('projects.delete')
+                @include('monthly-summary.delete')
                 @endforeach
             </tbody>
         </table>	

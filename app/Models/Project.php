@@ -10,7 +10,7 @@ class Project extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'client_id', 'description', 'manager_id', 'status_id', 'start_date', 'end_date'];
+    protected $fillable = ['name', 'client_id', 'description', 'manager_id', 'status_id', 'start_date', 'expected_end_date', 'budget', 'actual_end_date'];
 
     protected $casts = [
         'start_date' => 'date',
@@ -26,7 +26,7 @@ class Project extends Model
 
     public function manager()
     {
-        return $this->hasOne(Employee::class, 'manager_id');
+        return $this->hasOne(Employee::class, 'id', 'manager_id');
     }
 
     public function status()
