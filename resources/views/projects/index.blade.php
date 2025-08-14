@@ -61,7 +61,7 @@
 					<th>Start Date</th>
 					<th>Expected End Date</th>
 					<th>Actual End Date</th>
-                    <th>Actions</th>
+                    <th>{{ trans('actions.actions') }}</th>
                 </tr>
             </thead>
             <tbody>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('total_hours')->nullable();
             $table->longText('notes')->nullable(); // Optional: for additional summary notes
             $table->timestamps();
+            $table->softDeletes(); // Optional: for soft delete functionality
         });
     }
 

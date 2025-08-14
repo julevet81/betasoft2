@@ -6,5 +6,6 @@ return array (
   'delete' => 'supprimer',
   'show' => 'montrer',
   'search' => 'chercher',
-  'add' => 'ajouter'
+  'add' => 'ajouter',
+  'actions' => 'actions'
 );

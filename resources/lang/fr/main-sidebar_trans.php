@@ -31,5 +31,9 @@ return array (
   'add_permission' => 'Ajouter une permission',
   'edit_permission' => 'Modifier une permission',
   'delete_permission' => 'Supprimer une permission',
+  'management' => 'Gestion',
+  'posts' => 'Postes',
+  'contract-types' => 'Types de contrat',
+  'statuses' => 'Statuts',
 
 );

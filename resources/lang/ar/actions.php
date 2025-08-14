@@ -6,5 +6,6 @@ return array (
   'delete' => 'حذف',
   'show' => 'عرض',
   'search' => 'بحث',
-  'add' => 'إضافة'
+  'add' => 'إضافة',
+  'actions' => 'العمليات'
 );

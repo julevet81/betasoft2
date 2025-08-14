@@ -54,7 +54,7 @@
 												<th class="border-bottom-0">#</th>
 												<th class="border-bottom-0">permission Name</th>
 												<th class="border-bottom-0">Created at</th>
-												<th class="border-bottom-0">Actions</th>
+												<th class="border-bottom-0">{{ trans('actions.actions') }}</th>
 											</tr>
 										</thead>
 										<tbody>

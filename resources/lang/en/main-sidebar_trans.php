@@ -31,4 +31,8 @@ return array (
   'add_permission' => 'Add Permission',
   'edit_permission' => 'Edit Permission',
   'delete_permission' => 'Delete Permission',
+  'management' => 'Management',
+  'posts' => 'Posts',
+  'contract-types' => 'Contract Types',
+  'statuses' => 'Statuses',
 );

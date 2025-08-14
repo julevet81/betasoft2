@@ -59,7 +59,7 @@
                     <th>Post Title</th>
                     <th>Contract Type</th>
                     <th>Start Date</th>
-                    <th>Actions</th>
+                    <th>{{ trans('actions.actions') }}</th>
                 </tr>
             </thead>
             <tbody>

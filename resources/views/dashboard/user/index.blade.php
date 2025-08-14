@@ -51,7 +51,7 @@
 												<th class="border-bottom-0">Image</th>
 												<th class="border-bottom-0">Status</th>
 												<th class="border-bottom-0">Role</th>
-												<th class="border-bottom-0">Actions</th>
+												<th class="border-bottom-0">{{ trans('actions.actions') }}</th>
 											</tr>
 										</thead>
 										<tbody>

@@ -9,6 +9,9 @@
         <h2>Edit montlhy-summary</h2>
     </div>
 
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
     @foreach ($errors->all() as $error)
         <div class="alert alert-danger">{{ $error }}</div>
     @endforeach
@@ -49,7 +52,7 @@
         </div>
 
         {{-- Submit --}}
-        <button type="submit" class="btn btn-primary">Update montlhy-summary</button>
+        <button type="submit" class="btn btn-primary">Update monthly-summary</button>
     </form>
 </div>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\MonthlyWorkSummary;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -47,14 +48,15 @@ class MonthlyWorkSummaryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MonthlyWorkSummary $monthlyWorkSummary)
+    public function show(MonthlyWorkSummary $summary)
     {
-        $employee = Employee::where('id', $monthlyWorkSummary->employee_id)->first();
+        //$employee = Employee::where('id', $monthlyWorkSummary->employee_id)->first();
+        //$user = User::where('id', $employee->user_id)->first();
         $summaryData = [
-            'employee' => $employee->name,
-            'month' => Carbon::parse($monthlyWorkSummary->month)->format('F Y'),
-            'total_hours' => $monthlyWorkSummary->total_hours,
-            'notes' => $monthlyWorkSummary->notes,
+            'employee' => $summary->employee_id,
+            'month' => $summary->month,
+            'total_hours' => $summary->total_hours,
+            'notes' => $summary->notes,
         ];
 
         return view('monthly-summary.show', compact('summaryData'));
@@ -63,10 +65,10 @@ class MonthlyWorkSummaryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MonthlyWorkSummary $monthlyWorkSummary)
+    public function edit(MonthlyWorkSummary $summary)
     {
         $employees = Employee::all();
-        return view('monthly-summary.edit', compact('monthlyWorkSummary', 'employees'));
+        return view('monthly-summary.edit', compact('summary', 'employees'));
     }
 
     /**

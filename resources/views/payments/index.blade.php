@@ -88,7 +88,7 @@
 								<th>Method</th>
 								<th>Reference</th>
 								<th>Notes</th>
-								<th>Actions</th>
+								<th>{{ trans('actions.actions') }}</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -56,7 +56,7 @@
                     <th>Email</th>
                     <th>Phone</th>
 					<th>Address</th>
-                    <th>Actions</th>
+                    <th>{{ trans('actions.actions') }}</th>
                 </tr>
             </thead>
             <tbody>

@@ -55,7 +55,7 @@
 												<th class="border-bottom-0">status Name</th>
 												<th class="border-bottom-0">status Description</th>
 												<th class="border-bottom-0">Created at</th>
-												<th class="border-bottom-0">Actions</th>
+												<th class="border-bottom-0">{{ trans('actions.actions') }}</th>
 											</tr>
 										</thead>
 										<tbody>

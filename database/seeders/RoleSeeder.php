@@ -28,13 +28,6 @@ class RoleSeeder extends Seeder
             Role::create(['name' => $role, 'guard_name' => 'web']);
         }
 
-        // $role_admin = Role::create(['name' => 'admin']);
-        // $permission_manage_users = 'manage-users';
-
-        // $role_admin->givePermissionTo($permission_manage_users);
-
-        // $user = User::find(1); // Assuming the first user is the admin
-
-        // $user->assignRole($role_admin);
+        
     }
 }

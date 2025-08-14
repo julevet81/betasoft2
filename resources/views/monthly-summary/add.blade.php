@@ -6,6 +6,9 @@
 				
 <div class="container">
 
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
     @foreach ($errors->all() as $error)
         <div class="alert alert-danger">{{ $error }}</div>
     @endforeach
@@ -22,7 +25,7 @@
             <select name="employee_id" id="employee_id" class="form-select">
                 <option value="">Select Employee</option>
                 @foreach ($employees as $employee)
-                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                    <option value="{{ $employee->id }}">{{ $employee->user->name }}</option>
                 @endforeach
             </select>
         </div>

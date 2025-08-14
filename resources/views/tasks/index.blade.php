@@ -62,7 +62,7 @@
 								<th>Estimated Hours</th>
 								<th>Hours worked</th>
 								<th>Notes</th>
-								<th>Actions</th>
+								<th>{{ trans('actions.actions') }}</th>
 							</tr>
 						</thead>
 						<tbody>

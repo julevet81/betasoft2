@@ -43,10 +43,17 @@ class RoleController extends Controller
      */
     public function show(string $id)
     {
-        $role = ModelsRole::with('permissions')->findOrFail($id);
+        $role = ModelsRole::findOrFail($id); // Find the role by ID
 
-        return view('roles.show', compact('role'));
+        $roleData = [
+            'name' => $role->name,
+            'guard_name' => $role->guard_name,
+            'permissions' => $role->permissions->pluck('name')->toArray(),
+        ];
+
+        return view('roles.show', compact('roleData'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
