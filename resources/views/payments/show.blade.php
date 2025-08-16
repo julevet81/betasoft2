@@ -39,28 +39,29 @@
 @endsection
 @section('content')
 	<div class="container">
-    <div>
-		<h2>payment Details</h2>
+		<div>
+			<h2>payment Details</h2>
+		</div>
+	
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Field</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($paymentData as $key => $value)
+				<tr>
+					<td>{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
+					<td>{{ $value }}</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+		<a href="{{ route('payments.index') }}" class="btn btn-secondary">Back</a>
+
 	</div>
-
-	<table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Field</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($paymentData as $key => $value)
-                <tr>
-                    <td>{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
-                    <td>{{ $value }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    </div>
 @endsection
 @section('js')
 @endsection

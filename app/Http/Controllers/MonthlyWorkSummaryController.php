@@ -10,90 +10,72 @@ use Illuminate\Http\Request;
 
 class MonthlyWorkSummaryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+     public function index()
     {
-        $summaries = MonthlyWorkSummary::with('employee.user')->get();
-        return view('monthly-summary.index', compact('summaries'));
+        $summaries = MonthlyWorkSummary::with('employee')->latest()->paginate(10);
+        return view('monthly_summaries.index', compact('summaries'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $employees = Employee::all();
-        return view('monthly-summary.add', compact('employees'));
+        return view('monthly_summaries.add', compact('employees'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'employee_id' => 'required|exists:employees,id',
-            'month' => 'required|date',
-            'total_hours' => 'required|numeric',
+            'month' => 'required|date_format:Y-m',
+            'total_hours' => 'required|numeric|min:0',
             'notes' => 'nullable|string',
         ]);
 
         MonthlyWorkSummary::create($request->all());
 
-        return redirect()->route('monthly-summary.index')->with('success', 'Monthly summary created successfully.');
+        return redirect()->route('monthly-summary.index')
+                         ->with('success', 'Monthly summary created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(MonthlyWorkSummary $summary)
+    public function show(MonthlyWorkSummary $monthlySummary)
     {
-        //$employee = Employee::where('id', $monthlyWorkSummary->employee_id)->first();
-        //$user = User::where('id', $employee->user_id)->first();
+        $employee = Employee::where('id', $monthlySummary->employee_id)->first();
         $summaryData = [
-            'employee' => $summary->employee_id,
-            'month' => $summary->month,
-            'total_hours' => $summary->total_hours,
-            'notes' => $summary->notes,
+            'employee'  => $employee->user->name,
+            'month'     => $monthlySummary->month,
+            'total_hours' => $monthlySummary->total_hours,
+            'notes'     => $monthlySummary->notes,
         ];
 
-        return view('monthly-summary.show', compact('summaryData'));
+        return view('monthly_summaries.show', compact('summaryData'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(MonthlyWorkSummary $summary)
+           
+    public function edit(MonthlyWorkSummary $monthlySummary)
     {
         $employees = Employee::all();
-        return view('monthly-summary.edit', compact('summary', 'employees'));
+        return view('monthly_summaries.edit', compact('monthlySummary','employees'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, MonthlyWorkSummary $monthlyWorkSummary)
+    public function update(Request $request, MonthlyWorkSummary $monthlySummary)
     {
         $request->validate([
             'employee_id' => 'required|exists:employees,id',
-            'month' => 'required|date',
-            'total_hours' => 'required|numeric',
+            'month' => 'required|date_format:Y-m',
+            'total_hours' => 'required|numeric|min:0',
             'notes' => 'nullable|string',
         ]);
 
-        $monthlyWorkSummary->update($request->all());
+        $monthlySummary->update($request->all());
 
-        return redirect()->route('monthly-summary.index')->with('success', 'Monthly summary updated successfully.');
+        return redirect()->route('monthly-summary.index')
+                         ->with('success', 'Monthly summary updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(MonthlyWorkSummary $monthlyWorkSummary)
+    public function destroy(MonthlyWorkSummary $monthlySummary)
     {
-        $monthlyWorkSummary->delete();
-        return redirect()->route('monthly-summary.index')->with('success', 'Monthly summary deleted successfully.');
+        $monthlySummary->delete();
+        return redirect()->route('monthly-summary.index')
+                         ->with('success', 'Monthly summary deleted successfully.');
     }
 }

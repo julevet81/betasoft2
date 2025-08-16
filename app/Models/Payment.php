@@ -27,4 +27,12 @@ class Payment extends Model
     {
         return $this->belongsTo(Project::class);
     }
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'user_id');
+    }
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'user_id');
+    }
 }

@@ -39,59 +39,71 @@
 				<!-- row -->
 				<div class="row row-sm">
 					<div class="card-body">
-								<div class="table-responsive">
-									<table id="example" class="table key-buttons text-md-nowrap">
-										<thead>
-											<tr>
-												<th class="border-bottom-0">#</th>
-												<th class="border-bottom-0">user Name</th>
-												<th class="border-bottom-0">Email</th>
-												<th class="border-bottom-0">Phone</th>
-												<th class="border-bottom-0">Address</th>
-												<th class="border-bottom-0">Image</th>
-												<th class="border-bottom-0">Status</th>
-												<th class="border-bottom-0">Role</th>
-												<th class="border-bottom-0">{{ trans('actions.actions') }}</th>
-											</tr>
-										</thead>
-										<tbody>
-											@foreach($users as $user)
-											<tr>
-												<td>{{ $loop->iteration }}</td>
-												<td>{{ $user->name }}</td>
-												<td>{{ $user->email }}</td>
-												<td>{{ $user->phone }}</td>
-												<td>{{ $user->address }}</td>
-												<td>{{ $user->image }}</td>
-												<td>
-													<span class="badge {{ $user->status == 'active' ? 'badge-success' : 'badge-danger' }}">
-														{{ ucfirst($user->status) }}
-													</span>
-												</td>
-												<td>
-													@if (!empty($user->getRoleNames()))
-													@foreach ($user->getRoleNames() as $v)
-													<label class="badge badge-primary">{{ $v }}</label>
-													@endforeach
-													@endif
-												</td>
-												@can('manage-users')
-												<!-- manage-user -->
-												<td>
-													<a class="modal-effect btn btn-sm btn-success"  href="{{ route('users.show', $user->id) }}">show<i class="las la-pen"></i></a>
-													<a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"  data-toggle="modal" href="#edit{{$user->id}}"><i class="las la-pen"></i></a>
-                                                    <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$user->id}}">delete<i class="las la-trash"></i></a>
-                                                    <a class="modal-effect btn btn-sm btn-warning" href="{{ route('users.permissions.edit', $user->id) }}"><i class="las la-trash"></i></a>
-												</td>
-												@endcan
-											</tr>
-											@include('dashboard.user.edit')
-											@include('dashboard.user.delete')
+						<div>
+							@if(session('success'))
+							<div class="alert alert-success">{{ session('success') }}</div>
+							@endif
+							@foreach ($errors->all() as $error)
+							<div class="alert alert-danger">{{ $error }}</div>
+							@endforeach
+						</div>
+						<div class="table-responsive">
+							<table id="example" class="table key-buttons text-md-nowrap">
+								<thead>
+									<tr>
+										<th class="border-bottom-0">#</th>
+										<th class="border-bottom-0">user Name</th>
+										<th class="border-bottom-0">Email</th>
+										<th class="border-bottom-0">Phone</th>
+										<th class="border-bottom-0">Address</th>
+										<th class="border-bottom-0">Image</th>
+										<th class="border-bottom-0">Status</th>
+										<th class="border-bottom-0">Role</th>
+										<th class="border-bottom-0">{{ trans('actions.actions') }}</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach($users as $user)
+									<tr>
+										<td>{{ $loop->iteration }}</td>
+										<td>{{ $user->name }}</td>
+										<td>{{ $user->email }}</td>
+										<td>{{ $user->phone }}</td>
+										<td>{{ $user->address }}</td>
+										<td>{{ $user->image }}</td>
+										<td>
+											<span class="badge {{ $user->status == 'active' ? 'badge-success' : 'badge-danger' }}">
+												{{ ucfirst($user->status) }}
+											</span>
+										</td>
+										<td>
+											@if (!empty($user->getRoleNames()))
+											@foreach ($user->getRoleNames() as $v)
+											<label class="badge badge-primary">{{ $v }}</label>
 											@endforeach
-										</tbody>
-									</table>
-								</div>
-							</div>
+											@endif
+										</td>
+										@can('manage-users')
+										<!-- manage-user -->
+										<td>
+											<a class="modal-effect btn btn-sm btn-success"
+												href="{{ route('users.show', $user->id) }}">show<i class="las la-pen"></i></a>
+											<a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-toggle="modal"
+												href="#edit{{$user->id}}"><i class="las la-pen"></i></a>
+											<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal"
+												href="#delete{{$user->id}}">delete<i class="las la-trash"></i></a>
+											<a class="modal-effect btn btn-sm btn-warning"
+												href="{{ route('users.permissions.edit', $user->id) }}"><i class="las la-trash"></i></a>
+										</td>
+										@endcan
+									</tr>
+									@include('dashboard.user.edit')
+									@include('dashboard.user.delete')
+									@endforeach
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 @endsection
 @section('js')

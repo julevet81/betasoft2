@@ -7,6 +7,15 @@
 <div class="container">
     <h2>Add employee</h2>
 
+    <div>
+        @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    </div>
+
     <form action="{{ route('employees.store') }}" method="POST">
         @csrf
 

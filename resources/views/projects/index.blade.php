@@ -46,6 +46,14 @@
 									</a>
 								</div>
 							</div>
+							<div>
+								@if(session('success'))
+								<div class="alert alert-success">{{ session('success') }}</div>
+								@endif
+								@foreach ($errors->all() as $error)
+								<div class="alert alert-danger">{{ $error }}</div>
+								@endforeach
+							</div>
 							<div class="card-body">
 								<div class="table-responsive">
 									 <table class="table table-bordered align-middle">

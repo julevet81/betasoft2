@@ -33,56 +33,68 @@
 				<!-- /breadcrumb -->
 @endsection
 @section('content')
-				<!-- row -->
-				<div class="row row-sm">
-					<!--div-->
-					<div class="col-xl-12">
-						<div class="card mg-b-20">
-							<div class="card-header pb-0">
-								<div class="d-flex justify-content-between">
-									<!-- Button trigger modal -->
-									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-										{{ trans('main-sidebar_trans.add_permission') }}
-									</button>
-								</div>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="example" class="table key-buttons text-md-nowrap">
-										<thead>
-											<tr>
-												<th class="border-bottom-0">#</th>
-												<th class="border-bottom-0">permission Name</th>
-												<th class="border-bottom-0">Created at</th>
-												<th class="border-bottom-0">{{ trans('actions.actions') }}</th>
-											</tr>
-										</thead>
-										<tbody>
-											@foreach($permissions as $permission)
-											<tr>
-												<td>{{ $loop->iteration }}</td>
-												<td>{{ $permission->name }}</td>
-												<td>{{ $permission->created_at }}</td>
-												<td>
-													<a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"  data-toggle="modal" href="#edit{{$permission->id}}">{{ trans('actions.update') }}<i class="las la-pen"></i></a>
-                                                    <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$permission->id}}">{{ trans('actions.delete') }}<i class="las la-trash"></i></a>
-												</td>
-											</tr>
-											@include('permissions.edit')
-											@include('permissions.delete')
-											@endforeach
-										</tbody>
-									</table>
-								</div>
-							</div>
-
-						</div>
-						
+	<!-- row -->
+	<div class="row row-sm">
+		<!--div-->
+		<div class="col-xl-12">
+			<div class="card mg-b-20">
+				<div class="card-header pb-0">
+					<div class="d-flex justify-content-between">
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							{{ trans('main-sidebar_trans.add_permission') }}
+						</button>
 					</div>
-					<!--/div-->
-					@include('permissions.add')
 				</div>
-		<!-- Container closed -->
+				<div>
+					@if(session('success'))
+					<div class="alert alert-success">{{ session('success') }}</div>
+					@endif
+					@foreach ($errors->all() as $error)
+					<div class="alert alert-danger">{{ $error }}</div>
+					@endforeach
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table id="example" class="table key-buttons text-md-nowrap">
+							<thead>
+								<tr>
+									<th class="border-bottom-0">#</th>
+									<th class="border-bottom-0">permission Name</th>
+									<th class="border-bottom-0">Created at</th>
+									<th class="border-bottom-0">{{ trans('actions.actions') }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($permissions as $permission)
+								<tr>
+									<td>{{ $loop->iteration }}</td>
+									<td>{{ $permission->name }}</td>
+									<td>{{ $permission->created_at }}</td>
+									<td>
+										<a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
+											data-toggle="modal" href="#edit{{$permission->id}}">{{ trans('actions.update')
+											}}<i class="las la-pen"></i></a>
+										<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+											data-toggle="modal" href="#delete{{$permission->id}}">{{ trans('actions.delete')
+											}}<i class="las la-trash"></i></a>
+									</td>
+								</tr>
+								@include('permissions.edit')
+								@include('permissions.delete')
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+				</div>
+	
+			</div>
+	
+		</div>
+		<!--/div-->
+		@include('permissions.add')
+	</div>
+	<!-- Container closed -->
 @endsection
 @section('js')
 <script src="{{URL::asset('dashboard/plugins/notify/js/notifIt.js')}}"></script>

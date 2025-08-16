@@ -7,6 +7,13 @@
 <div class="container">
     <h2>Edit client</h2>
 
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">{{ $error }}</div>
+    @endforeach
+
     <form action="{{ route('clients.update', $client->id) }}" method="POST">
         @csrf
         @method('PUT')

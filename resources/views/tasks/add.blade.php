@@ -6,12 +6,18 @@
 				
 <div class="container">
 
-    @foreach ($errors->all() as $error)
+    <div>
+        @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        @foreach ($errors->all() as $error)
         <div class="alert alert-danger">{{ $error }}</div>
-    @endforeach
+        @endforeach
+    </div>
     <div class="mb-4">
         <h2>Add task</h2>
     </div>
+
 
     <form action="{{ route('tasks.store') }}" method="POST">
         @csrf

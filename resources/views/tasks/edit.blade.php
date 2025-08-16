@@ -9,9 +9,14 @@
         <h2>Edit task</h2>
     </div>
 
-    @foreach ($errors->all() as $error)
+    <div>
+        @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        @foreach ($errors->all() as $error)
         <div class="alert alert-danger">{{ $error }}</div>
-    @endforeach
+        @endforeach
+    </div>
 
     <form action="{{ route('tasks.update', $task->id) }}" method="POST">
         @csrf

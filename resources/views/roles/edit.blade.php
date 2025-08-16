@@ -6,6 +6,14 @@
 				
 <div class="container">
     <h2>Edit Role</h2>
+    <div>
+        @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    </div>
 
     <form action="{{ route('roles.update', $role->id) }}" method="POST">
         @csrf

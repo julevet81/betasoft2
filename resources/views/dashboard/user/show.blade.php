@@ -17,6 +17,15 @@
 <div class="container">
     <h2>{{ trans('Dashboard/auth.info_user') }}</h2>
 
+    <div>
+        @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    </div>
+
     <table class="table table-bordered">
         <thead>
             <tr>
