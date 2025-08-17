@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:manage_clients')->only(['index', 'create', 'store']);
+        $this->middleware('can:view_clients')->only(['show']);
+        $this->middleware('can:edit_clients')->only(['edit', 'update']);
+        $this->middleware('can:delete_clients')->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      */

@@ -35,5 +35,7 @@ return array (
   'posts' => 'Postes',
   'contract-types' => 'Types de contrat',
   'statuses' => 'Statuts',
+  'projects_tasks' => 'Projets & tâches',
+  'contracts' => 'Types de contrat',
 
 );

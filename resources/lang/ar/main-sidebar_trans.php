@@ -35,5 +35,7 @@ return array (
   'posts' => 'المناصب',
   'contract-types' => 'أنواع العقود',
   'statuses' => 'الحالات',
+  'projects_tasks' => 'المشاريع و المهام',
+  'contracts' => 'أنواع العقود'
 
 );

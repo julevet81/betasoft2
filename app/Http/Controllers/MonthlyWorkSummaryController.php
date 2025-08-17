@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 
 class MonthlyWorkSummaryController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:manage_summaries')->only(['index', 'create', 'store']);
+        $this->middleware('can:view_summaries')->only(['show']);
+        $this->middleware('can:edit_summaries')->only(['edit', 'update']);
+        $this->middleware('can:delete_summaries')->only(['destroy']);
+    }
+
      public function index()
     {
         $summaries = MonthlyWorkSummary::with('employee')->latest()->paginate(10);

@@ -35,4 +35,6 @@ return array (
   'posts' => 'Posts',
   'contract-types' => 'Contract Types',
   'statuses' => 'Statuses',
+  'projects_tasks' => 'Projects & Tasks',
+  'contracts' => 'Contract Types'
 );

@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class ManageUsersController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:manage_users')->only(['index', 'show', 'edit', 'update', 'destroy']);
+        $this->middleware('can:assign_permissions')->only(['assignPermissions']);
+    }
     public function index()
     {
         

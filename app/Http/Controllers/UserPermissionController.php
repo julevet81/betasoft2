@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class UserPermissionController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:manage_user_permissions')->only(['index', 'create', 'store']);
+        $this->middleware('can:view_user_permissions')->only(['show']);
+        $this->middleware('can:edit_user_permissions')->only(['edit', 'update']);
+        $this->middleware('can:delete_user_permissions')->only(['destroy']);
+    }
+
     public function edit($id)
     {
         $user = User::findOrFail($id);

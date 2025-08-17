@@ -8,6 +8,14 @@ use Spatie\Permission\Models\Permission as ModelsPermission;
 
 class PermissionController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:manage_permissions')->only(['index', 'create', 'store']);
+        $this->middleware('can:view_permissions')->only(['show']);
+        $this->middleware('can:edit_permissions')->only(['edit', 'update']);
+        $this->middleware('can:delete_permissions')->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      */

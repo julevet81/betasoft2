@@ -10,9 +10,16 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:manage_tasks')->only(['index', 'create', 'store']);
+        $this->middleware('can:view_tasks')->only(['show']);
+        $this->middleware('can:edit_tasks')->only(['edit', 'update']);
+        $this->middleware('can:delete_tasks')->only(['destroy']);
+    }
+
+    
     public function index()
     {
         // Fetch all tasks
@@ -20,9 +27,6 @@ class TaskController extends Controller
         return view('tasks.index', compact('tasks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         // Fetch necessary data for the form
@@ -33,9 +37,7 @@ class TaskController extends Controller
         return view('tasks.add', compact('projects', 'employees', 'statuses'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
     {
         // Validate and store the task
@@ -55,9 +57,6 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Task $task)
     {
         $employee = Employee::find($task->employee_id);

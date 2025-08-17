@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:manage_employees')->only(['index', 'create', 'store']);
+        $this->middleware('can:view_employees')->only(['show']);
+        $this->middleware('can:edit_employees')->only(['edit', 'update']);
+        $this->middleware('can:delete_employees')->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      */

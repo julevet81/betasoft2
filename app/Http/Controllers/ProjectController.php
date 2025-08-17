@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:manage_projects')->only(['index', 'create', 'store']);
+        $this->middleware('can:view_projects')->only(['show']);
+        $this->middleware('can:edit_projects')->only(['edit', 'update']);
+        $this->middleware('can:delete_projects')->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      */

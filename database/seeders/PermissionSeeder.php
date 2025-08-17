@@ -35,14 +35,31 @@ class PermissionSeeder extends Seeder
             'edit-tasks',
             'delete-tasks',
             'view-tasks',
-            'create-invoices',
-            'edit-invoices',
-            'delete-invoices',
-            'view-invoices',
+            'view-users',
             'create-internships',
             'edit-internships',
             'delete-internships',
             'view-internships',
+            'create-roles',
+            'edit-roles',
+            'delete-roles',
+            'view-roles',
+            'create-permissions',
+            'edit-permissions',
+            'delete-permissions',
+            'view-permissions',
+            'create-payments',
+            'edit-payments',
+            'delete-payments',
+            'view-payments',
+            'create-summaries',
+            'edit-summaries',
+            'delete-summaries',
+            'view-summaries',
+            'view_contracts',
+            
+
+
         ];
 
         foreach ($permissions as $permission) {

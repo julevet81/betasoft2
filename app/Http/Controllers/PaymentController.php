@@ -7,9 +7,19 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PaymentController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:manage_payments')->only(['index', 'create', 'store']);
+        $this->middleware('can:view_payments')->only(['show']);
+        $this->middleware('can:edit_payments')->only(['edit', 'update']);
+        $this->middleware('can:delete_payments')->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      */
